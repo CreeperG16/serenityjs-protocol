@@ -1,4 +1,4 @@
-enum PlayerStatuses {
+enum PlayerStatus {
 	LoginSuccess,
 	FailedClient,
 	FailedServer,
@@ -9,4 +9,4 @@ enum PlayerStatuses {
 	FailedServerFull,
 }
 
-export { PlayerStatuses };
+export { PlayerStatus };

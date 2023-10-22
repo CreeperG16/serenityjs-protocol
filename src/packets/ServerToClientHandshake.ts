@@ -1,11 +1,12 @@
 import { Packet, Serialize } from '@serenityjs/raknet.js';
-import { VarInt, Int32, Short } from 'binarystream.js';
+import { VarInt } from 'binarystream.js';
 import { Encapsulated } from '../Encapsulated';
+import { BigString } from '../types';
 
+// This packet is necessary to start encryption.
 @Packet(0x03, VarInt)
 class ServerToClientHandshake extends Encapsulated {
-	// TODO: make it the right type cus its a JWT string it contains the salt to complete the Diffie-Hellman key exchange
-	@Serialize(Short) public token!: string;
+	@Serialize(BigString) public token!: string;
 }
 
 export { ServerToClientHandshake };

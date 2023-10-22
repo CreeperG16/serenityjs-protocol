@@ -1,4 +1,4 @@
 export * from './CompressionMethod';
-export * from './PlayStatuses';
+export * from './PlayStatus';
 export * from './ResourceStatusDefinitions';
 export * from './ChatTypes';
