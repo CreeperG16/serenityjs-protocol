@@ -1,13 +1,13 @@
 import { Packet, Serialize } from '@serenityjs/raknet.js';
-import { VarInt, Short, Bool, UInt8, Float, LitString } from 'binarystream.js';
+import { VarInt, UInt8 } from 'binarystream.js';
 import { Encapsulated } from '../Encapsulated';
-import { resourceStatusDefinitions } from '../enums';
+import { ResourceStatus } from '../enums';
+import { ResourcePackIds } from '../types';
 
 @Packet(0x08, VarInt)
 class Disconect extends Encapsulated {
-	@Serialize(Short) public status!: resourceStatusDefinitions;
-	// TODO: make the field type a ResourcePackIds type
-	// @Serialize(LitString) public packIDS!: string;
+	@Serialize(UInt8) public status!: ResourceStatus;
+	@Serialize(ResourcePackIds) public packs!: string[];
 }
 
 export { Disconect };

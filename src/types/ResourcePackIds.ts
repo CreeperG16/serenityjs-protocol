@@ -1,0 +1,26 @@
+import { DataType, BinaryStream, Endianness } from 'binarystream.js';
+import type { Encapsulated } from '../Encapsulated';
+
+class ResourcePackIds extends DataType {
+	public static read(stream: Encapsulated): string[] {
+		const packs: string[] = [];
+		const length = stream.readInt16(Endianness.Little);
+		for (let i = 0; i < length; i++) {
+			const id = stream.readBigString();
+			packs.push(id);
+		}
+
+		return packs;
+	}
+	public static write(stream: Encapsulated, value: string[]): void {
+		const buffer = new BinaryStream();
+		buffer.writeInt16(value.length, Endianness.Little);
+		for (const pack of value) {
+			stream.writeBigString(pack);
+		}
+
+		stream.write(buffer.getBuffer());
+	}
+}
+
+export { ResourcePackIds };
