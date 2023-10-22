@@ -1,0 +1,40 @@
+{
+	"name": "@serenityjs/protocol",
+	"version": "0.0.1",
+	"description": "Minecraft Bedrock Edition protocol written in Typescript.",
+	"contributors": [
+		"PMK744",
+		"nobu-sh <chat@nobu.sh>"
+	],
+	"scripts": {
+		"build": "tsc",
+		"dev": "nodemon --config nodemon.json src/index.ts",
+		"format": "prettier --write . && cross-env TIMING=1 eslint src --ext .js,.ts --fix --format=pretty",
+		"lint": "prettier --check . && cross-env TIMING=1 eslint src --ext .js,.ts --format=pretty"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"cross-env": "^7.0.3",
+		"eslint": "^8.52.0",
+		"eslint-config-neon": "^0.1.57",
+		"eslint-formatter-pretty": "^5.0.0",
+		"nodemon": "^3.0.1",
+		"prettier": "^3.0.3",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.2.2"
+	},
+	"dependencies": {
+		"@serenityjs/raknet.js": "file:../raknet.js",
+		"binarystream.js": "^0.1.2"
+	},
+	"typings": "./dist/index.d.ts",
+	"module": "./dist/index.js",
+	"exports": {
+		"import": "./dist/index.js",
+		"require": "./dist/index.js"
+	},
+	"files": [
+		"dist"
+	]
+}
