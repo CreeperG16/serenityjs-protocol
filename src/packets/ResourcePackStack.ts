@@ -6,7 +6,7 @@ import { PackIdVersions, Experiments } from '../types';
 
 @Packet(0x07, VarInt)
 class ResourcePackStack extends Encapsulated {
-	@Serialize(Bool) public forceAccept!: boolean;
+	@Serialize(Bool) public mustAccept!: boolean;
 	@Serialize(PackIdVersions) public behaviorPacks!: PackIdVersion[];
 	@Serialize(PackIdVersions) public resourcePacks!: PackIdVersion[];
 	@Serialize(BigString) public gameVersion!: string;

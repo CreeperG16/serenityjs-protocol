@@ -14,7 +14,7 @@ interface BehaviorPack {
 class BehaviorPackInfo extends DataType {
 	public static read(stream: Encapsulated): BehaviorPack[] {
 		const packs: BehaviorPack[] = [];
-		const length = stream.readUShort(Endianness.Little);
+		const length = stream.readInt16(Endianness.Little);
 		for (let i = 0; i < length; i++) {
 			const uuid = stream.readBigString();
 			const version = stream.readBigString();
@@ -29,19 +29,16 @@ class BehaviorPackInfo extends DataType {
 		return packs;
 	}
 	public static write(stream: Encapsulated, value: BehaviorPack[]): void {
-		const buffer = new BinaryStream();
-		buffer.writeUShort(value.length, Endianness.Little);
+		stream.writeInt16(value.length, Endianness.Little);
 		for (const pack of value) {
-			buffer.writeBigString(pack.uuid);
-			buffer.writeBigString(pack.version);
-			buffer.writeUInt32(pack.size, Endianness.Little);
-			buffer.writeBigString(pack.contentKey);
-			buffer.writeBigString(pack.subPackName);
-			buffer.writeBigString(pack.contentIdentity);
-			buffer.writeBool(pack.hasScripts);
+			stream.writeBigString(pack.uuid);
+			stream.writeBigString(pack.version);
+			stream.writeUInt32(pack.size, Endianness.Little);
+			stream.writeBigString(pack.contentKey);
+			stream.writeBigString(pack.subPackName);
+			stream.writeBigString(pack.contentIdentity);
+			stream.writeBool(pack.hasScripts);
 		}
-
-		stream.write(buffer.getBuffer());
 	}
 }
 

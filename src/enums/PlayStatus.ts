@@ -7,6 +7,8 @@ enum PlayerStatus {
 	FailedVanillaEdu,
 	FailedIncompatible,
 	FailedServerFull,
+	FailedEditorVanillaMismatch,
+	FailedVanillaEditorMismatch,
 }
 
 export { PlayerStatus };

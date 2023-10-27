@@ -1,4 +1,4 @@
-import { DataType, Endianness, BinaryStream } from 'binarystream.js';
+import { DataType, Endianness } from 'binarystream.js';
 import type { Encapsulated } from '../Encapsulated';
 
 interface ResourcePack {
@@ -15,7 +15,7 @@ interface ResourcePack {
 class ResourcePackInfo extends DataType {
 	public static read(stream: Encapsulated): ResourcePack[] {
 		const packs: ResourcePack[] = [];
-		const length = stream.readUShort(Endianness.Little);
+		const length = stream.readInt16(Endianness.Little);
 		for (let i = 0; i < length; i++) {
 			const uuid = stream.readBigString();
 			const version = stream.readBigString();
@@ -31,20 +31,17 @@ class ResourcePackInfo extends DataType {
 		return packs;
 	}
 	public static write(stream: Encapsulated, value: ResourcePack[]): void {
-		const buffer = new BinaryStream();
-		buffer.writeUShort(value.length, Endianness.Little);
+		stream.writeInt16(value.length, Endianness.Little);
 		for (const pack of value) {
 			stream.writeBigString(pack.uuid);
 			stream.writeBigString(pack.version);
-			buffer.writeUInt32(pack.size, Endianness.Little);
+			stream.writeUInt32(pack.size, Endianness.Little);
 			stream.writeBigString(pack.contentKey);
 			stream.writeBigString(pack.subPackName);
 			stream.writeBigString(pack.contentIdentity);
-			buffer.writeBool(pack.hasScripts);
-			buffer.writeBool(pack.rtxEnabled);
+			stream.writeBool(pack.hasScripts);
+			stream.writeBool(pack.rtxEnabled);
 		}
-
-		stream.write(buffer.getBuffer());
 	}
 }
 

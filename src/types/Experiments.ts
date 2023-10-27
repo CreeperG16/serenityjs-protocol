@@ -9,7 +9,7 @@ interface Experiment {
 class Experiments extends DataType {
 	public static read(stream: Encapsulated): Experiment[] {
 		const packs: Experiment[] = [];
-		const length = stream.readInt16(Endianness.Little);
+		const length = stream.readInt32(Endianness.Little);
 		for (let i = 0; i < length; i++) {
 			const name = stream.readBigString();
 			const enabled = stream.readBool();
@@ -20,7 +20,7 @@ class Experiments extends DataType {
 	}
 	public static write(stream: Encapsulated, value: Experiment[]): void {
 		const buffer = new BinaryStream();
-		buffer.writeInt16(value.length, Endianness.Little);
+		buffer.writeInt32(value.length, Endianness.Little);
 		for (const pack of value) {
 			buffer.writeBigString(pack.name);
 			buffer.writeBool(pack.enabled);

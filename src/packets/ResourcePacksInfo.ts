@@ -6,9 +6,10 @@ import { BehaviorPackInfo, ResourcePackInfo, PackLinks } from '../types';
 
 @Packet(0x06, VarInt)
 class ResourcePacksInfo extends Encapsulated {
+	@Serialize(Bool) public mustAccept!: boolean;
+	@Serialize(Bool) public hasScripts!: boolean;
 	@Serialize(Bool) public forceAccept!: boolean;
-	@Serialize(Bool) public scriptingEnabled!: boolean;
-	@Serialize(BehaviorPackInfo) public behahaviorPacks!: BehaviorPack[];
+	@Serialize(BehaviorPackInfo) public behaviorPacks!: BehaviorPack[];
 	@Serialize(ResourcePackInfo) public resourcePacks!: ResourcePack[];
 	@Serialize(PackLinks) public packLinks!: PackLink[];
 }

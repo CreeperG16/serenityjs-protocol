@@ -4,8 +4,8 @@ import { Encapsulated } from '../Encapsulated';
 import { PlayerStatus } from '../enums';
 
 @Packet(0x02, VarInt)
-class playStatus extends Encapsulated {
-	@Serialize(Int32) public stutus!: PlayerStatus;
+class PlayStatus extends Encapsulated {
+	@Serialize(Int32) public status!: PlayerStatus;
 }
 
-export { playStatus };
+export { PlayStatus };

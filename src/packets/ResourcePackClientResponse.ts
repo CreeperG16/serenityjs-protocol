@@ -5,9 +5,9 @@ import { ResourceStatus } from '../enums';
 import { ResourcePackIds } from '../types';
 
 @Packet(0x08, VarInt)
-class Disconect extends Encapsulated {
+class ResourcePackClientResponse extends Encapsulated {
 	@Serialize(UInt8) public status!: ResourceStatus;
 	@Serialize(ResourcePackIds) public packs!: string[];
 }
 
-export { Disconect };
+export { ResourcePackClientResponse };
