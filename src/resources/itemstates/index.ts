@@ -1,1 +1,1 @@
-export { itemstates } from './itemstates.json';
+export { itemstates as ItemStates } from './itemstates.json';
