@@ -1,6 +1,6 @@
 {
 	"name": "@serenityjs/protocol",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Minecraft Bedrock Edition protocol written in Typescript.",
 	"contributors": [
 		"PMK744",
