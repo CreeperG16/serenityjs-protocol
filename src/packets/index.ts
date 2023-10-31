@@ -13,6 +13,9 @@ export * from './ResourcePackStack';
 export * from './ResourcePackClientResponse';
 // Gap
 export * from './StartGame';
+export * from './AddPlayer';
+// Gap
+export * from './MovePlayer';
 // Gap
 export * from './TickSync';
 // Gap
@@ -21,8 +24,12 @@ export * from './Respawn';
 // Gap
 export * from './LevelChunk';
 // Gap
+export * from './PlayerList';
+// Gap
 export * from './RequestChunkRadius';
 export * from './ChunkRadiusUpdate';
+// Gap
+export * from './SetLocalPlayerAsInitialized';
 // Gap
 export * from './NetworkChunkPublisherUpdate';
 export * from './BiomeDefinitionList';

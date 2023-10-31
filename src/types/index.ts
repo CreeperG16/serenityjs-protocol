@@ -17,3 +17,5 @@ export * from './Items';
 export * from './ByteArray';
 export * from './ChunkCoords';
 export * from './Biomes';
+export * from './MovementCause';
+export * from './PlayerListRecords';

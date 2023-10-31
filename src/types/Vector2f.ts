@@ -3,19 +3,19 @@ import type { Encapsulated } from '../Encapsulated';
 
 interface Vec2f {
 	x: number;
-	y: number;
+	z: number;
 }
 
 class Vector2f extends DataType {
 	public static read(stream: Encapsulated): Vec2f {
 		const x = stream.readLF32();
-		const y = stream.readLF32();
+		const z = stream.readLF32();
 
-		return { x, y };
+		return { x, z };
 	}
 	public static write(stream: Encapsulated, value: Vec2f): void {
 		stream.writeLF32(value.x);
-		stream.writeLF32(value.y);
+		stream.writeLF32(value.z);
 	}
 }
 

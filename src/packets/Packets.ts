@@ -1,3 +1,4 @@
+import { AddPlayer } from './AddPlayer';
 import { BiomeDefinitionList } from './BiomeDefinitionList';
 import { ChunkRadiusUpdate } from './ChunkRadiusUpdate';
 import { ClientCacheStatus } from './ClientCacheStatus';
@@ -6,16 +7,19 @@ import { CreativeContent } from './CreativeContent';
 import { Disconect } from './Disconect';
 import { LevelChunk } from './LevelChunk';
 import { Login } from './Login';
+import { MovePlayer } from './MovePlayer';
 import { NetworkChunkPublisherUpdate } from './NetworkChunkPublisherUpdate';
 import { NetworkSettings } from './NetworkSettings';
 import { PlayStatus } from './PlayStatus';
 import { PlayerAuthInput } from './PlayerAuthInput';
+import { PlayerList } from './PlayerList';
 import { RequestChunkRadius } from './RequestChunkRadius';
 import { RequestNetworkSettings } from './RequestNetworkSettings';
 import { ResourcePackClientResponse } from './ResourcePackClientResponse';
 import { ResourcePackStack } from './ResourcePackStack';
 import { ResourcePacksInfo } from './ResourcePacksInfo';
 import { ServerToClientHandshake } from './ServerToClientHandshake';
+import { SetLocalPlayerAsInitialized } from './SetLocalPlayerAsInitialized';
 import { SetSpawnPosition } from './SetSpawnPosition';
 import { StartGame } from './StartGame';
 import { TickSync } from './TickSync';
@@ -32,6 +36,9 @@ enum Packets {
 	ResourcePackClientResponse = 0x08, // 8
 	// Gap
 	StartGame = 0x0b, // 11
+	AddPlayer = 0x0c, // 12
+	// Gap
+	MovePlayer = 0x13, // 19
 	// Gap
 	TickSync = 0x17, // 23
 	// Gap
@@ -40,8 +47,12 @@ enum Packets {
 	// Gap
 	LevelChunk = 0x3a, // 58
 	// Gap
+	PlayerList = 0x3f, // 63
+	// Gap
 	RequestChunkRadius = 0x45, // 69
 	ChunkRadiusUpdate = 0x46, // 70
+	// Gap
+	SetLocalPlayerAsInitialized = 0x71, // 113
 	// Gap
 	NetworkChunkPublisherUpdate = 0x79, // 121
 	BiomeDefinitionList = 0x7a, // 122
@@ -67,6 +78,9 @@ const Packet = {
 	[Packets.ResourcePackClientResponse]: ResourcePackClientResponse,
 	// Gap
 	[Packets.StartGame]: StartGame,
+	[Packets.AddPlayer]: AddPlayer,
+	// Gap
+	[Packets.MovePlayer]: MovePlayer,
 	// Gap
 	[Packets.TickSync]: TickSync,
 	// Gap
@@ -75,8 +89,12 @@ const Packet = {
 	// Gap
 	[Packets.LevelChunk]: LevelChunk,
 	// Gap
+	[Packets.PlayerList]: PlayerList,
+	// Gap
 	[Packets.RequestChunkRadius]: RequestChunkRadius,
 	[Packets.ChunkRadiusUpdate]: ChunkRadiusUpdate,
+	// Gap
+	[Packets.SetLocalPlayerAsInitialized]: SetLocalPlayerAsInitialized,
 	// Gap
 	[Packets.NetworkChunkPublisherUpdate]: NetworkChunkPublisherUpdate,
 	[Packets.BiomeDefinitionList]: BiomeDefinitionList,
