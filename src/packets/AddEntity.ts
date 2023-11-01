@@ -1,51 +1,40 @@
 import type { Buffer } from 'node:buffer';
-import { Packet } from '@serenityjs/raknet.js';
+import { Packet, Serialize } from '@serenityjs/raknet.js';
 import { Encapsulated } from '../Encapsulated';
-import { VarInt } from 'binarystream.js';
+import { BigString, LF32, VarInt, VarLong, ZigZong } from 'binarystream.js';
+import {
+	Vec3f,
+	Vector3f,
+	EntityAttribute,
+	EntityAttributes,
+	EntityProperties,
+	EntityProperty,
+	EntityLinks,
+	EntityLink,
+} from '../types';
 
 @Packet(0x0d, VarInt)
 class AddEntity extends Encapsulated {
-	public uniqueEntityId!: bigint;
-	public runtimeId!: bigint;
-	public entityType!: string;
+	@Serialize(ZigZong) public uniqueEntityId!: bigint;
+	@Serialize(VarLong) public runtimeId!: bigint;
+	@Serialize(BigString) public entityType!: string;
 
-	public x!: number;
-	public y!: number;
-	public z!: number;
+	@Serialize(Vector3f) public position!: Vec3f;
+	@Serialize(Vector3f) public motion!: Vec3f;
 
-	public motionX!: number;
-	public motionY!: number;
-	public motionZ!: number;
+	@Serialize(LF32) public pitch!: number;
+	@Serialize(LF32) public yaw!: number;
+	@Serialize(LF32) public headYaw!: number;
+	@Serialize(LF32) public bodyYaw!: number;
 
-	public pitch!: number;
-	public yaw!: number;
-	public headYaw!: number;
-	public bodyYaw!: number;
+	@Serialize(EntityAttributes) public attributes!: EntityAttribute[];
 
-	public override serialize(): Buffer {
-		this.writeVarInt(this.getId());
-		this.writeZigZong(this.uniqueEntityId);
-		this.writeVarLong(this.runtimeId);
-		this.writeBigString(this.entityType);
-		this.writeLF32(this.x);
-		this.writeLF32(this.y);
-		this.writeLF32(this.z);
-		this.writeLF32(this.motionX);
-		this.writeLF32(this.motionY);
-		this.writeLF32(this.motionZ);
-		this.writeLF32(this.pitch);
-		this.writeLF32(this.yaw);
-		this.writeLF32(this.headYaw);
-		this.writeLF32(this.bodyYaw);
+	// todo??
+	@Serialize(VarInt) public metadata!: 0;
+	//	this.writeVarInt(0); // MetadataDictionary
 
-		this.writeVarInt(0); // EntityAttributes
-		this.writeVarInt(0); // MetadataDictionary
-		this.writeVarInt(0); // EntityProperties
-		this.writeVarInt(0); // -
-		this.writeVarInt(0); // Links
-
-		return this.getBuffer();
-	}
+	@Serialize(EntityProperties) public properties!: EntityProperty;
+	@Serialize(EntityLinks) public links!: EntityLink[];
 }
 
 export { AddEntity };

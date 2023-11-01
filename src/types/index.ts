@@ -19,3 +19,6 @@ export * from './ChunkCoords';
 export * from './Biomes';
 export * from './MovementCause';
 export * from './PlayerListRecords';
+export * from './EntityAttributes';
+export * from './EntityProperties';
+export * from './EntityLinks';
