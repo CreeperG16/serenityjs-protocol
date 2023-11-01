@@ -29,9 +29,9 @@ class AddEntity extends Encapsulated {
 
 	@Serialize(EntityAttributes) public attributes!: EntityAttribute[];
 
-	// todo??
+	// todo?? Need to look into how metadata is serialized
 	@Serialize(VarInt) public metadata!: 0;
-	//	this.writeVarInt(0); // MetadataDictionary
+	//	this.writeVarInt(0);
 
 	@Serialize(EntityProperties) public properties!: EntityProperty;
 	@Serialize(EntityLinks) public links!: EntityLink[];
