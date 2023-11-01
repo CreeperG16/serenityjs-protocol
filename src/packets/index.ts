@@ -14,6 +14,7 @@ export * from './ResourcePackClientResponse';
 // Gap
 export * from './StartGame';
 export * from './AddPlayer';
+export * from './AddEntity';
 // Gap
 export * from './MovePlayer';
 // Gap
