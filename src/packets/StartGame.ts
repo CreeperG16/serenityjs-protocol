@@ -3,7 +3,6 @@ import {
 	Endianness,
 	VarInt,
 	ZigZag,
-	Short,
 	Bool,
 	UInt8,
 	LF32,
@@ -17,6 +16,7 @@ import {
 	Uuid,
 } from 'binarystream.js';
 import { Encapsulated } from '../Encapsulated';
+import { Gamemode, PermissionLevel, Difficulty } from '../enums';
 import type { GameRule, Experiment, BlockProperty, ItemState } from '../types';
 import {
 	Vec3f,
@@ -34,16 +34,11 @@ import {
 	NBT,
 } from '../types';
 
-// Zigzag64 = VarLong
-// VarInt64 = VarULong
-// Zigzag32 = VarInt
-// VarInt = VarUInt
-
 @Packet(0x0b, VarInt)
 class StartGame extends Encapsulated {
 	@Serialize(ZigZong) public entityId!: bigint;
 	@Serialize(VarLong) public runtimeEntityId!: bigint;
-	@Serialize(ZigZag) public playerGamemode!: number; // Gamemode
+	@Serialize(ZigZag) public playerGamemode!: Gamemode;
 	@Serialize(Vector3f) public playerPosition!: Vec3f;
 	@Serialize(Vector2f) public rotation!: Vec2f;
 	@Serialize(UInt64, Endianness.Little) public seed!: bigint;
@@ -51,8 +46,8 @@ class StartGame extends Encapsulated {
 	@Serialize(BigString) public biomeName!: string;
 	@Serialize(ZigZag) public dimension!: number;
 	@Serialize(ZigZag) public generator!: number;
-	@Serialize(ZigZag) public worldGamemode!: number; // Gamemode
-	@Serialize(ZigZag) public difficulty!: number;
+	@Serialize(ZigZag) public worldGamemode!: Gamemode;
+	@Serialize(ZigZag) public difficulty!: Difficulty;
 	@Serialize(BlockCoordinates) public spawnPosition!: BlockCoordinate;
 	@Serialize(Bool) public achievementsDisabled!: boolean;
 	@Serialize(ZigZag) public editorWorldType!: number;
@@ -76,7 +71,7 @@ class StartGame extends Encapsulated {
 	@Serialize(Bool) public experimentsPreviouslyToggled!: boolean;
 	@Serialize(Bool) public bonusChest!: boolean;
 	@Serialize(Bool) public mapEnabled!: boolean;
-	@Serialize(UInt8) public permissionLevel!: number; // PermissionLevel
+	@Serialize(UInt8) public permissionLevel!: PermissionLevel;
 	@Serialize(Int32, Endianness.Little) public serverChunkTickRange!: number;
 	@Serialize(Bool) public hasLockedBehaviorPack!: boolean;
 	@Serialize(Bool) public hasLockedResourcePack!: boolean;
@@ -112,7 +107,7 @@ class StartGame extends Encapsulated {
 	@Serialize(BigString) public engine!: string;
 	@Serialize(NBT) public propertyData!: any;
 	@Serialize(UInt64, Endianness.Little) public blockPaletteChecksum!: bigint;
-	@Serialize(Uuid) public worldTemplateId!: string; // Uuid
+	@Serialize(Uuid) public worldTemplateId!: string;
 	@Serialize(Bool) public clientSideGeneration!: boolean;
 	@Serialize(Bool) public blockNetworkIdsAreHashes!: boolean;
 	@Serialize(Bool) public serverControlledSounds!: boolean;

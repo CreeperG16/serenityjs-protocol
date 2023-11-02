@@ -11,6 +11,7 @@ export * from './Disconect';
 export * from './ResourcePacksInfo';
 export * from './ResourcePackStack';
 export * from './ResourcePackClientResponse';
+export * from './Text';
 // Gap
 export * from './StartGame';
 export * from './AddPlayer';
@@ -19,10 +20,20 @@ export * from './MovePlayer';
 // Gap
 export * from './TickSync';
 // Gap
+export * from './UpdateAttributes';
+// Gap
+export * from './Interact';
+// Gap
+export * from './PlayerAction';
+// Gap
+export * from './SetEntityData';
+// Gap
 export * from './SetSpawnPosition';
 export * from './Respawn';
+export * from './ContainerOpen';
 // Gap
 export * from './LevelChunk';
+export * from './SetDifficulty';
 // Gap
 export * from './PlayerList';
 // Gap
@@ -39,5 +50,9 @@ export * from './ClientCacheStatus';
 export * from './NetworkSettings';
 export * from './PlayerAuthInput';
 export * from './CreativeContent';
+// Gap
+export * from './ToastRequest';
+export * from './UpdateAbilities';
+export * from './UpdateAdventureSettings';
 // Gap
 export * from './RequestNetworkSettings';

@@ -1,10 +1,11 @@
 import { Packet, Serialize } from '@serenityjs/raknet.js';
-import { VarInt, Short, Bool, UInt8, Float, Int32 } from 'binarystream.js';
+import { VarInt } from 'binarystream.js';
 import { Encapsulated } from '../Encapsulated';
+import { Difficulty } from '../enums';
 
 @Packet(0x3c, VarInt)
 class SetDifficulty extends Encapsulated {
-	@Serialize(VarInt) public dificulty!: number;
+	@Serialize(VarInt) public difficulty!: Difficulty;
 }
 
 export { SetDifficulty };
