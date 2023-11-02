@@ -22,3 +22,8 @@ export * from './PlayerListRecords';
 export * from './EntityAttributes';
 export * from './EntityProperties';
 export * from './EntityLinks';
+export * from './Rotation';
+export * from './PlayerAttributes';
+export * from './RecipeIngredient';
+export * from './Items';
+export * from './Recipes';
