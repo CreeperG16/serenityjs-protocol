@@ -15,6 +15,7 @@ export * from './Text';
 // Gap
 export * from './StartGame';
 export * from './AddPlayer';
+export * from './AddEntity';
 // Gap
 export * from './MovePlayer';
 // Gap

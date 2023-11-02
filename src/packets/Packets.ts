@@ -1,3 +1,4 @@
+import { AddEntity } from './AddEntity';
 import { AddPlayer } from './AddPlayer';
 import { BiomeDefinitionList } from './BiomeDefinitionList';
 import { ChunkRadiusUpdate } from './ChunkRadiusUpdate';
@@ -49,6 +50,7 @@ enum Packets {
 	// Gap
 	StartGame = 0x0b, // 11
 	AddPlayer = 0x0c, // 12
+	AddEntity = 0x0d, // 13
 	// Gap
 	MovePlayer = 0x13, // 19
 	// Gap
@@ -106,6 +108,7 @@ const Packet = {
 	// Gap
 	[Packets.StartGame]: StartGame,
 	[Packets.AddPlayer]: AddPlayer,
+	[Packets.AddEntity]: AddEntity,
 	// Gap
 	[Packets.MovePlayer]: MovePlayer,
 	// Gap
