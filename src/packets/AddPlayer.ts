@@ -1,59 +1,31 @@
-import type { Buffer } from 'node:buffer';
 import { Packet, Serialize } from '@serenityjs/raknet.js';
-import { VarInt, Short, Bool, UInt8, Float, Int32, Endianness } from 'binarystream.js';
+import { VarInt, Endianness, Uuid, BigString, VarLong, LF32, ZigZag, Int64, UInt8, Int32 } from 'binarystream.js';
 import { Encapsulated } from '../Encapsulated';
+import { PermissionLevel, Gamemode } from '../enums';
+import { Vec3f, Vector3f, Vec2f, Vector2f } from '../types';
 
 @Packet(0x0c, VarInt)
 class AddPlayer extends Encapsulated {
-	public uuid!: string;
-	public username!: string;
-	public runtimeId!: bigint;
-	public platformChatId!: string;
-
-	public x!: number;
-	public y!: number;
-	public z!: number;
-
-	public motionX!: number;
-	public motionY!: number;
-	public motionZ!: number;
-
-	public pitch!: number;
-	public yaw!: number;
-	public headYaw!: number;
-
-	public override serialize(): Buffer {
-		this.writeVarInt(this.getId());
-		this.writeUuid(this.uuid);
-		this.writeBigString(this.username);
-		this.writeVarLong(this.runtimeId);
-		this.writeBigString(this.platformChatId);
-		this.writeLF32(this.x);
-		this.writeLF32(this.y);
-		this.writeLF32(this.z);
-		this.writeLF32(this.motionX);
-		this.writeLF32(this.motionY);
-		this.writeLF32(this.motionZ);
-		this.writeLF32(this.pitch);
-		this.writeLF32(this.yaw);
-		this.writeLF32(this.headYaw);
-
-		this.writeZigZag(0);
-		this.writeZigZag(0);
-		this.writeVarInt(0);
-		this.writeVarInt(0);
-		this.writeVarInt(0);
-
-		this.writeInt64(0n, Endianness.Little);
-		this.writeUInt8(0);
-		this.writeUInt8(0);
-		this.writeUInt8(0);
-		this.writeVarInt(0);
-		this.writeBigString('Win10');
-		this.writeInt32(7, Endianness.Little);
-
-		return this.getBuffer();
-	}
+	@Serialize(Uuid) public uuid!: string;
+	@Serialize(BigString) public username!: string;
+	@Serialize(VarLong) public runtimeId!: bigint;
+	@Serialize(BigString) public platformChatId!: string;
+	@Serialize(Vector3f) public position!: Vec3f;
+	@Serialize(Vector3f) public velocity!: Vec3f;
+	@Serialize(Vector2f) public rotation!: Vec2f;
+	@Serialize(LF32) public headYaw!: number;
+	@Serialize(ZigZag) public item!: number;
+	@Serialize(ZigZag) public gamemode!: Gamemode;
+	@Serialize(VarInt) public metadata!: number;
+	@Serialize(VarInt) public propertiesInts!: number;
+	@Serialize(VarInt) public propertiesFloats!: number;
+	@Serialize(Int64, Endianness.Little) public uniqueId!: bigint;
+	@Serialize(UInt8) public permissionLevel!: PermissionLevel;
+	@Serialize(UInt8) public commandPermission!: number;
+	@Serialize(UInt8) public abilities!: number;
+	@Serialize(VarInt) public links!: number;
+	@Serialize(BigString) public deviceId!: string;
+	@Serialize(Int32, Endianness.Little) public deviceOS!: number;
 }
 
 export { AddPlayer };

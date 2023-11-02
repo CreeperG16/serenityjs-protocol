@@ -12,48 +12,29 @@ export * from './ResourcePacksInfo';
 export * from './ResourcePackStack';
 export * from './ResourcePackClientResponse';
 export * from './Text';
-export * from './SetTime';
+// Gap
 export * from './StartGame';
 export * from './AddPlayer';
 export * from './AddEntity';
-export * from './RemoveEntity';
-export * from './AddItemEntity';
 // Gap
-export * from './TakeItemEntity';
-export * from './MoveEntity';
 export * from './MovePlayer';
-export * from './RiderJump';
-export * from './UpdateBlock';
-export * from './AddPainting';
+// Gap
 export * from './TickSync';
-export * from './LevelSoundEventOld';
-export * from './LevelEvent';
-export * from './BlockEvent';
-export * from './EntityEvent';
-export * from './MobEffect';
+// Gap
 export * from './UpdateAttributes';
 // Gap
 export * from './Interact';
-export * from './BlockPickRequest';
-export * from './EntityPickRequest';
+// Gap
 export * from './PlayerAction';
 // Gap
-export * from './HurtArmor';
+export * from './SetEntityData';
 // Gap
-export * from './SetEntityMotion';
-export * from './SetEntityLink';
-export * from './SetHealth';
 export * from './SetSpawnPosition';
-export * from './Animate';
 export * from './Respawn';
 export * from './ContainerOpen';
-export * from './ContainerClose';
-export * from './PlayerHotbar';
-// Gap
-export * from './ContainerSetData';
-export * from './CraftingData';
 // Gap
 export * from './LevelChunk';
+export * from './SetDifficulty';
 // Gap
 export * from './PlayerList';
 // Gap
@@ -70,5 +51,9 @@ export * from './ClientCacheStatus';
 export * from './NetworkSettings';
 export * from './PlayerAuthInput';
 export * from './CreativeContent';
+// Gap
+export * from './ToastRequest';
+export * from './UpdateAbilities';
+export * from './UpdateAdventureSettings';
 // Gap
 export * from './RequestNetworkSettings';

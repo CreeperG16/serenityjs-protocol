@@ -1,4 +1,4 @@
-enum chatTypes {
+enum ChatTypes {
 	Raw,
 	Chat,
 	Translation,
@@ -8,8 +8,9 @@ enum chatTypes {
 	System,
 	Whisper,
 	Announcement,
-	Object,
-	ObjectWhisper,
+	JsonWhisper,
+	Json,
+	JsonAnnouncement,
 }
 
-export { chatTypes };
+export { ChatTypes };

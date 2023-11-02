@@ -17,22 +17,18 @@ enum Action {
 	StartGlide,
 	StopGlide,
 	BuildDenied,
-	CrackBreak,
+	CrackBlock,
 	ChangeSkin,
-	SetEnchatnmentSeed, // No longer used
-	Swimming,
+	SetEnchantmentSeed,
+	StartSwimming,
 	StopSwimming,
 	StartSpinAttack,
 	StopSpinAttack,
 	InteractBlock,
-	PredictBreak,
-	ContinueBreak,
+	PredictDestroyBlock,
+	ContinueDestroyBlock,
 	StartItemUseOn,
 	StopItemUseOn,
-	HandledTeleport,
-	MissedSwing,
-	StartCrawling,
-	StopCrawling,
 }
 
 export { Action };

@@ -1,18 +1,18 @@
 import { Packet, Serialize } from '@serenityjs/raknet.js';
-import { VarInt, Int32, Short, Bool, LitString } from 'binarystream.js';
+import { VarInt, UInt8, Bool, Endianness, BigString } from 'binarystream.js';
 import { Encapsulated } from '../Encapsulated';
-import { chatTypes } from '../enums';
+import { ChatTypes } from '../enums';
+import { TextSource, TextParameters } from '../types';
 
 @Packet(0x09, VarInt)
 class Text extends Encapsulated {
-	@Serialize(Short) public type!: chatTypes;
-	@Serialize(Bool) public translate!: boolean;
-
-	// Derived from above; values sent here change depending on that.
-	// TODO: add the right packet type and fields cus idk how to do it so when the type is "0, 1, or 2" then "Source Name" will be also sent etc etc
-
-	@Serialize(LitString) public XUID?: string;
-	@Serialize(LitString) public PlatformChatID?: string;
+	@Serialize(UInt8) public type!: ChatTypes;
+	@Serialize(Bool) public needsTranslation!: boolean;
+	@Serialize(TextSource, Endianness.Big, 'type') public source!: string;
+	@Serialize(BigString) public message!: string;
+	@Serialize(TextParameters, Endianness.Big, 'type') public params!: string[];
+	@Serialize(BigString) public xuid!: string;
+	@Serialize(BigString) public platformChatId!: string;
 }
 
 export { Text };

@@ -1,52 +1,50 @@
-import { BinaryStream, DataType } from 'binarystream.js';
+import { DataType } from 'binarystream.js';
 import type { Encapsulated } from '../Encapsulated';
 
 interface EntityProperty {
-	floatProperties: {
-		index: number;
-		value: number;
-	}[];
-	intProperties: {
-		index: number;
-		value: number;
-	}[];
+	floats: EntityPropertyChunk[];
+	ints: EntityPropertyChunk[];
+}
+
+interface EntityPropertyChunk {
+	index: number;
+	value: number;
 }
 
 class EntityProperties extends DataType {
 	public static read(stream: Encapsulated): EntityProperty {
-		const intProperties: EntityProperty['intProperties'] = [];
-		const intPropLength = stream.readVarInt();
-		for (let i = 0; i < intPropLength; i++) {
+		const props: EntityProperty = { floats: [], ints: [] };
+
+		const intsLength = stream.readVarInt();
+		for (let i = 0; i < intsLength; i++) {
 			const index = stream.readVarInt();
 			const value = stream.readZigZag();
-			intProperties.push({ index, value });
+
+			props.ints.push({ index, value });
 		}
 
-		const floatProperties: EntityProperty['floatProperties'] = [];
-		const floatPropLength = stream.readVarInt();
-		for (let i = 0; i < floatPropLength; i++) {
+		const floatsLength = stream.readVarInt();
+		for (let i = 0; i < floatsLength; i++) {
 			const index = stream.readVarInt();
 			const value = stream.readLF32();
-			floatProperties.push({ index, value });
+
+			props.floats.push({ index, value });
 		}
 
-		return { intProperties, floatProperties };
+		return props;
 	}
 	public static write(stream: Encapsulated, value: EntityProperty): void {
-		const buffer = new BinaryStream();
-		buffer.writeVarInt(value.intProperties.length);
-		for (const prop of value.intProperties) {
-			buffer.writeVarInt(prop.index);
-			buffer.writeZigZag(prop.value);
+		stream.writeVarInt(value.ints.length);
+		for (const prop of value.ints) {
+			stream.writeVarInt(prop.index);
+			stream.writeZigZag(prop.value);
 		}
 
-		buffer.writeVarInt(value.floatProperties.length);
-		for (const prop of value.floatProperties) {
-			buffer.writeVarInt(prop.index);
-			buffer.writeLF32(prop.value);
+		stream.writeVarInt(value.floats.length);
+		for (const prop of value.floats) {
+			stream.writeVarInt(prop.index);
+			stream.writeLF32(prop.value);
 		}
-
-		stream.write(buffer.getBuffer());
 	}
 }
 
